@@ -1,0 +1,289 @@
+{
+  "name": "dsaflow",
+  "displayName": "DSAFlow",
+  "description": "Track DSA solves from VS Code, sync them to your dashboard, and keep revision notes without leaving the editor.",
+  "version": "1.0.0",
+  "publisher": "dsaflow",
+  "license": "MIT",
+  "icon": "dsaflow-icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samirpandey-07/dsaflow.git"
+  },
+  "homepage": "https://github.com/samirpandey-07/dsaflow",
+  "bugs": {
+    "url": "https://github.com/samirpandey-07/dsaflow/issues"
+  },
+  "galleryBanner": {
+    "color": "#0c111b",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "dsa",
+    "leetcode",
+    "competitive-programming",
+    "algorithms",
+    "data-structures",
+    "interview-prep",
+    "revision"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "files": [
+    "out/**",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "package.json",
+    "dsaflow-icon.png"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "dsaflow.startTracking",
+        "title": "Start Tracking",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.stopTracking",
+        "title": "Stop Tracking",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.openDashboard",
+        "title": "Open Dashboard",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.addNote",
+        "title": "Add Note to Last Problem",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.login",
+        "title": "Sign In",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.logout",
+        "title": "Sign Out",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.viewStats",
+        "title": "View Stats",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.retryPendingSync",
+        "title": "Retry Pending Sync",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.refreshSidebar",
+        "title": "Refresh Sidebar",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.importWorkspace",
+        "title": "Import Workspace History",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.logCurrentFile",
+        "title": "Log Current File",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.openProblemItem",
+        "title": "Open Problem",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.completeRevision",
+        "title": "Mark Revision Complete",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.snoozeRevision",
+        "title": "Snooze Revision",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.showLearningCard",
+        "title": "Show Learning Card",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.manageTrackedFolders",
+        "title": "Manage Tracked Folders",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.addTrackedFolder",
+        "title": "Add Tracked Folder",
+        "category": "DSAFlow"
+      },
+      {
+        "command": "dsaflow.removeTrackedFolder",
+        "title": "Remove Tracked Folder",
+        "category": "DSAFlow"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "dsaflow.sidebar",
+          "name": "DSAFlow"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "dsaflow.refreshSidebar",
+          "when": "view == dsaflow.sidebar",
+          "group": "navigation@1"
+        },
+        {
+          "command": "dsaflow.importWorkspace",
+          "when": "view == dsaflow.sidebar",
+          "group": "navigation@2"
+        },
+        {
+          "command": "dsaflow.openDashboard",
+          "when": "view == dsaflow.sidebar",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "dsaflow.openProblemItem",
+          "when": "view == dsaflow.sidebar && (viewItem == dsaflow.revision || viewItem == dsaflow.recent)",
+          "group": "inline@1"
+        },
+        {
+          "command": "dsaflow.completeRevision",
+          "when": "view == dsaflow.sidebar && viewItem == dsaflow.revision",
+          "group": "inline@2"
+        },
+        {
+          "command": "dsaflow.snoozeRevision",
+          "when": "view == dsaflow.sidebar && viewItem == dsaflow.revision",
+          "group": "inline@3"
+        },
+        {
+          "command": "dsaflow.showLearningCard",
+          "when": "view == dsaflow.sidebar && (viewItem == dsaflow.revision || viewItem == dsaflow.recent)",
+          "group": "navigation@1"
+        },
+        {
+          "command": "dsaflow.addNote",
+          "when": "view == dsaflow.sidebar && (viewItem == dsaflow.revision || viewItem == dsaflow.recent)",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DSAFlow",
+      "properties": {
+        "dsaflow.apiUrl": {
+          "type": "string",
+          "default": "https://dsaflow.onrender.com/api/problems",
+          "description": "Full API endpoint used to log solves."
+        },
+        "dsaflow.dashboardUrl": {
+          "type": "string",
+          "default": "https://dsaflow-dashboard.vercel.app",
+          "description": "Dashboard URL opened by the Open Dashboard command."
+        },
+        "dsaflow.watchedGlob": {
+          "type": "string",
+          "default": "**/*.{cpp,py,java,js,ts}",
+          "description": "Glob pattern used by the extension watcher."
+        },
+        "dsaflow.requireFolderApproval": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only auto-log files from folders explicitly approved by the user."
+        },
+        "dsaflow.workspaceConfigFile": {
+          "type": "string",
+          "default": ".dsaflow.json",
+          "description": "Workspace config file used to store tracked and ignored folders."
+        },
+        "dsaflow.autoLogOnCreate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically log newly created solution files."
+        },
+        "dsaflow.promptOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prompt to log supported files when they are saved."
+        },
+        "dsaflow.promptForProblemUrl": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ask for the original problem URL before sending a solve."
+        },
+        "dsaflow.defaultDifficulty": {
+          "type": "string",
+          "enum": [
+            "Easy",
+            "Medium",
+            "Hard"
+          ],
+          "default": "Medium",
+          "description": "Difficulty sent when DSAFlow cannot infer it from the source."
+        },
+        "dsaflow.savePromptDebounceMs": {
+          "type": "number",
+          "default": 1500,
+          "minimum": 250,
+          "description": "Debounce applied before showing the log-on-save prompt."
+        },
+        "dsaflow.autoImportOnFirstRun": {
+          "type": "boolean",
+          "default": true,
+          "description": "Offer to scan and import existing DSA files the first time the extension sees a workspace."
+        },
+        "dsaflow.showLearningCardAfterLog": {
+          "type": "boolean",
+          "default": true,
+          "description": "Offer a post-solve learning card after a new problem is logged."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "node ./esbuild.mjs",
+    "typecheck": "tsc --noEmit -p ./",
+    "watch": "node ./esbuild.mjs --watch",
+    "lint": "eslint src --ext .ts",
+    "check": "npm run typecheck && npm run compile && npm run lint",
+    "package": "vsce package --allow-missing-repository --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.x",
+    "@typescript-eslint/parser": "^6.x",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.4",
+    "eslint": "^8.x",
+    "typescript": "^5.x"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "dsaflow",
+  "version": "1.0.0",
+  "description": "DSAFlow Monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspace=dashboard",
+    "supabase:link": "cd dsaflow && npx supabase link",
+    "supabase:push": "cd dsaflow && npx supabase db push",
+    "supabase:start": "cd dsaflow && npx supabase start",
+    "supabase:stop": "cd dsaflow && npx supabase stop"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
